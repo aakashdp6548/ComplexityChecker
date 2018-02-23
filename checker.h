@@ -35,6 +35,15 @@ class ComplexityChecker {
 public:
 
     // requires: function pointer to void function with one integer argument
+    double runTrial(void (*func)(int), int n) {
+        Timer timer;
+        timer.start();
+        func(n);
+        timer.stop();
+        return timer.seconds();
+    }
+
+    // requires: function pointer to void function with one integer argument
     void checkComplexity(void (*func)(int), int size, int trials) {
 
         double averageRatio = findAverageRatio(func, size, trials);
@@ -44,14 +53,6 @@ public:
     }
 
 private:
-
-    double runTrial(void (*func)(int), int n) {
-        Timer timer;
-        timer.start();
-        func(n);
-        timer.stop();
-        return timer.seconds();
-    }
 
     double findAverageRatio(void (*func)(int), int size, int trials) {
         Timer timer;
